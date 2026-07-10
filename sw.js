@@ -1,9 +1,17 @@
 /* The Morning Alignment — offline service worker.
    Runtime caching so the app opens without a network once it's been loaded. */
-const CACHE = 'tma-v1';
+const CACHE = 'tma-v2';
 
 self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
+self.addEventListener('activate', (e) =>
+  e.waitUntil(
+    // Drop every old cache so a new build is never masked by a stale bundle.
+    caches
+      .keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
+  ),
+);
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
