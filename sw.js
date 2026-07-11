@@ -2,7 +2,7 @@
    NETWORK-FIRST for everything: always fetch the latest when online, fall back
    to cache only when offline. This prevents stale bundles from being served
    after a deploy (the old cache-first strategy hid new builds). */
-const CACHE = 'tma-v3';
+const CACHE = 'tma-v4';
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) =>

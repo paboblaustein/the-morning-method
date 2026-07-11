@@ -30,7 +30,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Alignment" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-    <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});if(navigator.storage&&navigator.storage.persist){navigator.storage.persist();}});}</script>
+    <script>if('serviceWorker' in navigator){var __reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',function(){if(__reloaded)return;__reloaded=true;window.location.reload();});window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(reg){reg.update();}).catch(function(){});if(navigator.storage&&navigator.storage.persist){navigator.storage.persist();}});}</script>
   </head>
 
   <body>
